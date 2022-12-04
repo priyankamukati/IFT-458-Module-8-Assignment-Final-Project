@@ -1,0 +1,111 @@
+//-***********************************************************************************************
+//-Author: Priyanka Mukati
+//-Date: 12/03/2022
+//-Source code description: Pug file which display the loans of all the users for the Admin 
+//-************************************************************************************************
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='https://fonts.googleapis.com/css?family=Oswald:300,400,400i,700', rel='stylesheet')
+    link(rel='stylesheet', href='css/style.css')
+    link(rel='shortcut icon', type='image/png', href='img/bank.png')
+    title  View Loans
+  body 
+    // DARK BLUE HEADER
+    header.header
+
+    .header_align
+
+      .header_data_merge 
+        .header_loan_logo
+          img(src='img/company.png' alt='Loan logo' height="105")
+
+        .header_down
+          .header_span PayEasy Loans
+
+      nav.nav.nav--loans
+        
+        if user.role =='admin'
+         img(src='img/homeicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/') Home
+         img(src='img/myprofileicon.png' alt='Loan logo' height='30') 
+         a.nav__el(href='/Myprofile') My profile
+         img(src='img/allusericon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllUser') View All User
+         img(src='img/viewloanicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllLoans') View All Loans List
+         img(src='img/logouticon.png' alt='Logout logo' height='30')  
+         a.nav__el(href='/logout') Logout
+         a.nav__el(href='#')
+           img.nav__user-img(src='img/users/user.png' alt='User photo')
+           span  #{user.firstName + ' ' + user.lastName}
+
+        else 
+         
+         img(src='img/homeicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/') Home
+         img(src='img/myprofileicon.png' alt='Loan logo' height='30') 
+         a.nav__el(href='/Myprofile') My profile
+         img(src='img/takealoan1.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/newLoan') Take a Loan
+         img(src='img/viewloanicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllloan') View my Loans List
+         img(src='img/reporticon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/faq') My Report
+
+         img(src='img/logouticon.png' alt='Logout logo' height='30')  
+         a.nav__el(href='/logout') Logout
+         a.nav__el(href='#')
+           img.nav__user-img(src='img/users/user.png' alt='User photo')
+           span  #{user.firstName + ' ' + user.lastName}
+         
+    h1.heading-primary
+      br
+      span All Loans Details
+      br
+      br
+    div
+      table.table-header
+        thead
+          tr.table-secondary1
+            th(scope='col' style="width: 2%") #           
+            th(scope='col' style="width: 10%") Customer Name
+            th(scope='col' style="width: 9%") Phone Number
+            th(scope='col' style="width: 8%") Loan Number
+            th(scope='col' style="width: 8%") Loan Type
+            th(scope='col' style="width: 8%") Loan Amount 
+            th(scope='col' style="width: 9%") Interest Rate 
+            th(scope='col' style="width: 10%") Loan Term Years
+            th(scope='col' style="width: 11%") Description
+            th(scope='col' style="width: 17%") Total payment with interest
+            th(scope='col' style="width: 15%") Start Date
+            th(scope='col' style="width: 19%") Action
+ 
+            
+        tbody
+          each loandata in data  
+            form(action='/deleteLoan' method='POST')
+              tr.table-secondary2.auto-index
+                td
+                td=loandata.customerName
+                td=loandata.phoneNumber
+                td=loandata.loanNumber
+                td=loandata.loanType
+                td=loandata.loanAmount
+                td=loandata.interest 
+                td=loandata.loanTermYears
+                td=loandata.description
+                td=loandata.totalPaymentWithInterest
+                td=loandata.startDate
+                th
+                  input.card__sub-heading(type='submit' value='Delete')
+                  input.card__sub-heading(type='hidden' name="_id" value=loandata._id)
+               
+              
+             
+              
+      .login_empty_container    
+      //FOOTER
+      include _footer          

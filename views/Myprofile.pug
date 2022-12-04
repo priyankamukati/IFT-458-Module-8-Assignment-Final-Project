@@ -1,0 +1,118 @@
+//-***********************************************************************************************
+//-Author: Priyanka Mukati
+//-Date: 12/03/2022
+//-Source code description: Pug file to display general information of a user
+//-************************************************************************************************
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Oswald:300,400,400i,700' rel='stylesheet')
+  link(rel='stylesheet' href='css/style.css')
+  link(rel='shortcut icon' type='image/png' href='/img/companylogo.png')
+  title  PayEasy Loans
+  
+
+  body
+    // DARK BLUE HEADER
+    header.header
+
+    .header_align
+
+      .header_data_merge 
+        .header_loan_logo
+          img(src='img/company.png' alt='Loan logo' height="105")
+
+        .header_down
+          .header_span PayEasy Loans
+
+      
+
+
+
+      nav.nav.nav--loans
+        form(action='/userProfile')
+        if user.role =='admin'
+         img(src='img/homeicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/') Home
+         img(src='img/myprofileicon.png' alt='Loan logo' height='30') 
+         a.nav__el(href='/Myprofile') My profile
+         img(src='img/allusericon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllUser') View All User
+         img(src='img/viewloanicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllLoans') View All Loans List
+         img(src='img/logouticon.png' alt='Logout logo' height='30')  
+         a.nav__el(href='/logout') Logout
+         a.nav__el(href='#')
+           img.nav__user-img(src='img/users/user.png' alt='User photo')
+           span  #{user.firstName + ' ' + user.lastName}
+        else 
+         
+         img(src='img/homeicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/') Home
+         img(src='img/myprofileicon.png' alt='Loan logo' height='30') 
+         a.nav__el(href='/Myprofile') My profile
+         img(src='img/takealoan1.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/newLoan') Take a Loan
+         img(src='img/viewloanicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllLoan') View my Loans List
+
+
+         img(src='img/logouticon.png' alt='Logout logo' height='30')  
+         a.nav__el(href='/logout') Logout
+         a.nav__el(href='#')
+           img.nav__user-img(src='img/users/user.png' alt='User photo')
+           span  #{user.firstName + ' ' + user.lastName}
+
+
+    
+
+    //CONTENT
+    block content
+.user-profile.py-4
+  .container
+    .row
+      .col-lg-4
+        .card.shadow-sm
+          .card-header.bg-transparent.text-center
+            img.profile_img(src='img/profilepic.png' alt='user dp')
+            h3 #{user.firstName + ' ' + user.lastName}
+            br
+            br
+          .card-body
+
+      .col-lg-8
+        .card.shadow-sm
+          .card-header.bg-transparent.border-0
+            h3.mb-0
+              i.far.fa-clone.pr-1
+              | General Information
+          .card-body1.pt-0
+          form(action='/editProfile')
+            table.table.table-bordered
+              tr
+                th(width='30%') Phone Number
+                td(width='2%') :
+                td #{user.phoneNumber}
+              tr
+                th(width='30%') Address
+                td(width='2%') :
+                td #{user.address}
+              tr
+                th(width='30%') Gender
+                td(width='2%') :
+                td #{user.gender}
+              tr
+                th(width='30%') Date of Birth
+                td(width='2%') :
+                td #{dob}
+            input.card__sub-heading1(type='submit' value='Edit My Profile')     
+              
+        div(style='height: 26px')
+        
+        
+        br
+        br
+
+    //FOOTER
+    include _footer        

@@ -1,0 +1,128 @@
+//-***********************************************************************************************
+//-Author: Priyanka Mukati
+//-Date: 12/03/2022
+//-Source code description: Pug file to edit the user details
+//-************************************************************************************************
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='https://fonts.googleapis.com/css?family=Oswald:300,400,400i,700' rel='stylesheet')
+  link(rel='stylesheet' href='css/style.css')
+  link(rel='shortcut icon' type='image/png' href='/img/companylogo.png')
+  title  PayEasy Loans
+  
+
+  body
+    // DARK BLUE HEADER
+    header.header
+
+    .header_align
+
+      .header_data_merge 
+        .header_loan_logo
+          img(src='img/company.png' alt='Loan logo' height="105")
+
+        .header_down
+          .header_span PayEasy Loans
+
+      nav.nav.nav--loans
+        form(action='/editProfile' method='PUT')
+        if user.role =='admin'
+         img(src='img/homeicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/') Home
+         img(src='img/myprofileicon.png' alt='Loan logo' height='30') 
+         a.nav__el(href='/Myprofile') My profile
+         img(src='img/allusericon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllUser') View All User
+         img(src='img/viewloanicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/loans') View All Loans List
+         img(src='img/logouticon.png' alt='Logout logo' height='30')  
+         a.nav__el(href='/logout') Logout
+         a.nav__el(href='#')
+           img.nav__user-img(src='img/users/user.png' alt='User photo')
+           span  #{user.firstName + ' ' + user.lastName}
+        else 
+         
+         img(src='img/homeicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/') Home
+         img(src='img/myprofileicon.png' alt='Loan logo' height='30') 
+         a.nav__el(href='/Myprofile') My profile
+         img(src='img/takealoan1.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/newLoan') Take a Loan
+         img(src='img/viewloanicon.png' alt='Loan logo' height='30')  
+         a.nav__el(href='/viewAllLoan') View my Loans List
+
+
+         img(src='img/logouticon.png' alt='Logout logo' height='30')  
+         a.nav__el(href='/logout') Logout
+         a.nav__el(href='#')
+           img.nav__user-img(src='img/users/user.png' alt='User photo')
+           span  #{user.firstName + ' ' + user.lastName}
+        
+    
+    
+
+    //CONTENT
+    block content
+     .card-main 
+      .card-container2
+        .card1
+          .card__details1
+            h4.card__sub-heading1 Update Your Profile
+            p.card__text1
+              | Please enter the following Details
+            
+              form(action='/editProfile' method='POST')
+                label(for='pnumber') Phone Number 
+                br
+                input#loanamount(type='pnumber' name='phoneNumber' value= user.phoneNumber)
+                br
+                br
+                label(for='address') Address 
+                br   
+                input#interest(type='address' name='address' value= user.address)
+                br
+                br
+                label(for='gender') Gender
+                br
+                if user.gender== 'Male' 
+                    input#gender(type='radio' name='gender' value='Male' checked) 
+                else
+                    input#gender(type='radio' name='gender' value='Male' )                       
+                label(for='male') Male 
+                if user.gender== 'Female'                                                                  
+                    input#gender(type='radio' name='gender' value='Female' checked) 
+                else
+                    input#gender(type='radio' name='gender' value='Female')       
+                label(for='female') Female   
+                if user.gender== 'Other'           
+                    input#gender(type='radio' name='gender' value='Other' checked)  
+                else 
+                    input#gender(type='radio' name='gender' value='Other')     
+                label(for='other') Other                 
+                br
+                br
+                label(for='dateOfBirth') Date of Birth
+                br
+                input#dateofbirth(type="date" name='dateOfBirth' value=dob)
+                br
+                br
+                input.card__sub-heading(type='submit' value='Save')
+                br
+                br
+                h1.card__sub-heading2 #{message}
+
+      .header_loan_logo
+          img(src='img/people-login.png' alt='Loan logo', width="950rem")
+
+
+    //FOOTER
+    include _footer
+
+
+
+
+
+
+
